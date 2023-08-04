@@ -81,7 +81,7 @@ public class Service {
     public String  get_last_del_time(String dp_id)
     {
         String ans_time="";
-        int max_time=Integer.MIN_VALUE;
+        int max_time=0;
         List<Order> list_ord = repo.get_order_by_dpid(dp_id);
         for(Order ord:list_ord)
         {

@@ -46,6 +46,8 @@ public class repository {
         partner_order__db.put(dp_id,temp);
         assigned_orders.put(ord_id,dp_id);
         unassigned_order--;
+        DeliveryPartner partner = partner_db.get(dp_id);
+        partner.setNumberOfOrders(temp.size());
 
     }
     public Order get_order_by_id(String ord_id)
