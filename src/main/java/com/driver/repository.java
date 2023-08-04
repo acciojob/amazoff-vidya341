@@ -24,7 +24,7 @@ public class repository {
     HashMap<String , DeliveryPartner> partner_db = new HashMap<>();
     HashMap<String , List<Order>> partner_order__db = new HashMap<>();
 
-    HashMap<String,Order> unassigned_orders = new HashMap<>();
+    HashMap<String,String> assigned_orders = new HashMap<>();
 
     Stack<pair> st = new Stack<>();
     public void add_order(Order order)
@@ -44,6 +44,7 @@ public class repository {
         Order ord = order_db.get(ord_id);
         temp.add(ord);
         partner_order__db.put(dp_id,temp);
+        assigned_orders.put(ord_id,dp_id);
         unassigned_order--;
 
     }
@@ -71,7 +72,7 @@ public class repository {
     }
     public int get_unassigned_order_count()
     {
-        return unassigned_order;
+        return order_db.size()-assigned_orders.size();
 //        int count=0;
 //        boolean flag = false;
 //        for(Order order:order_db.values())
@@ -99,7 +100,7 @@ public class repository {
         List<Order> list_ord = partner_order__db.get(dp_id);
         for(Order ord:list_ord)
         {
-            unassigned_orders.put(ord.getId(),ord);
+            assigned_orders.remove(ord.getId());
         }
         partner_db.remove(dp_id);
         partner_order__db.remove(dp_id);
