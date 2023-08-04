@@ -50,12 +50,15 @@ public class repository {
     }
     public Order get_order_by_id(String ord_id)
     {
-
-        return order_db.get(ord_id);
+        if(order_db.containsKey(ord_id))
+            return order_db.get(ord_id);
+        return null;
     }
     public DeliveryPartner get_dp_by_id(String dp_id)
     {
-        return partner_db.get(dp_id);
+        if(partner_db.containsKey(dp_id))
+            return partner_db.get(dp_id);
+        return null;
     }
     public List<Order> get_order_by_dpid(String dp_id)
     {
