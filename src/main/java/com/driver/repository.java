@@ -19,6 +19,7 @@ class pair{
 
 @Repository
 public class repository {
+    int unassigned_order=0;
     HashMap<String ,Order> order_db = new HashMap<>();
     HashMap<String , DeliveryPartner> partner_db = new HashMap<>();
     HashMap<String , List<Order>> partner_order__db = new HashMap<>();
@@ -28,6 +29,7 @@ public class repository {
     Stack<pair> st = new Stack<>();
     public void add_order(Order order)
     {
+        unassigned_order++;
         String ord_id = order.getId();
         order_db.put(ord_id,order);
     }
@@ -42,10 +44,12 @@ public class repository {
         Order ord = order_db.get(ord_id);
         temp.add(ord);
         partner_order__db.put(dp_id,temp);
+        unassigned_order--;
 
     }
     public Order get_order_by_id(String ord_id)
     {
+
         return order_db.get(ord_id);
     }
     public DeliveryPartner get_dp_by_id(String dp_id)
@@ -67,27 +71,28 @@ public class repository {
     }
     public int get_unassigned_order_count()
     {
-        int count=0;
-        boolean flag = false;
-        for(Order order:order_db.values())
-        {
-            flag = false;
-            for(List<Order> list_ord:partner_order__db.values())
-            {
-                if(list_ord.contains(order))
-                {
-                    flag = true;
-                    break;
-                }
-            }
-
-            if(flag==false)
-            {
-                count++;
-                unassigned_orders.put(order.getId(),order);
-            }
-        }
-        return count;
+        return unassigned_order;
+//        int count=0;
+//        boolean flag = false;
+//        for(Order order:order_db.values())
+//        {
+//            flag = false;
+//            for(List<Order> list_ord:partner_order__db.values())
+//            {
+//                if(list_ord.contains(order))
+//                {
+//                    flag = true;
+//                    break;
+//                }
+//            }
+//
+//            if(flag==false)
+//            {
+//                count++;
+//                unassigned_orders.put(order.getId(),order);
+//            }
+//        }
+//        return count;
     }
     public void delete_partner_and_order(String dp_id)
     {
