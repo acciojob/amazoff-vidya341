@@ -65,13 +65,12 @@ public class Service {
     {
         int count=0;
         List<Order> list = repo.get_order_by_dpid(dp_id);
-        int h = Integer.parseInt(time.substring(0,2));
-        int m = Integer.parseInt(time.substring(3,4));
-        int int_time = (h*60)+m;
+
+        int int_time = Integer.parseInt(time.substring(0, 2)) * 60 + Integer.parseInt(time.substring(3));
         for(Order ord:list)
         {
             int del_time = ord.getDeliveryTime();
-            if(del_time<int_time)
+            if(del_time>int_time)
             {
                 count++;
             }
