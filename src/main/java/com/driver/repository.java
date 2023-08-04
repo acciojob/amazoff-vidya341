@@ -75,7 +75,8 @@ public class repository {
     }
     public int get_unassigned_order_count()
     {
-        return order_db.size()-assigned_orders.size();
+        //return order_db.size()-assigned_orders.size();
+        return unassigned_order;
 //        int count=0;
 //        boolean flag = false;
 //        for(Order order:order_db.values())
