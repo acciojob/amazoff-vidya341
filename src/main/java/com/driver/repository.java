@@ -105,6 +105,7 @@ public class repository {
         for(Order ord:list_ord)
         {
             assigned_orders.remove(ord.getId());
+            unassigned_order--;
         }
         partner_db.remove(dp_id);
         partner_order__db.remove(dp_id);
