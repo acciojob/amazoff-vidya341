@@ -52,8 +52,12 @@ public class repository {
     }
     public Order get_order_by_id(String ord_id)
     {
-        if(order_db.containsKey(ord_id))
-            return order_db.get(ord_id);
+//        if(order_db.containsKey(ord_id))
+//            return order_db.get(ord_id);
+//        return null;
+        for(String s : order_db.keySet()){
+            if(s.equals(ord_id))return order_db.get(s);
+        }
         return null;
     }
     public DeliveryPartner get_dp_by_id(String dp_id)
@@ -64,7 +68,9 @@ public class repository {
     }
     public List<Order> get_order_by_dpid(String dp_id)
     {
-        return partner_order__db.get(dp_id);
+        if(partner_order__db.containsKey(dp_id))
+            return partner_order__db.get(dp_id);
+        return new ArrayList<>();
     }
     public List<String> get_all_orders()
     {
@@ -103,7 +109,7 @@ public class repository {
     }
     public void delete_partner_and_order(String dp_id)
     {
-        List<Order> list_ord = partner_order__db.get(dp_id);
+        List<Order> list_ord = partner_order__db.getOrDefault(dp_id,new ArrayList<>());
         for(Order ord:list_ord)
         {
             assigned_orders.remove(ord.getId());
