@@ -80,6 +80,7 @@ public class Service {
     }
     public String  get_last_del_time(String dp_id)
     {
+        String ans_time="";
         int max_time=Integer.MIN_VALUE;
         List<Order> list_ord = repo.get_order_by_dpid(dp_id);
         for(Order ord:list_ord)
@@ -87,7 +88,18 @@ public class Service {
             int del_time = ord.getDeliveryTime();
             max_time = Math.max(max_time,del_time);
         }
-        return max_time+"";
+        int hour=max_time/60;
+        String sHour="";
+        if(hour<10)sHour="0"+String.valueOf(hour);
+        else sHour=String.valueOf(hour);
+
+        int min=max_time%60;
+        String sMin = "";
+        if(min<10)sMin = "0" + String.valueOf(min);
+        else sMin = String.valueOf(min);
+
+        ans_time=sHour+":"+sMin;
+        return ans_time;
 
 
     }
