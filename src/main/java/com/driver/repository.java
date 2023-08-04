@@ -123,9 +123,10 @@ public class repository {
             {
                 if(ord.getId().equals(ord_id))
                 {
+                    List<Order> temp = new ArrayList<>(ords);
                     part_id = dp_id;
-                    ords.remove(ord);
-                    partner_order__db.put(part_id,ords);
+                    temp.remove(ord);
+                    partner_order__db.put(part_id,temp);
                     st.add(new pair(part_id,ord.getDeliveryTime()));
                     found = true;
                     break;
@@ -136,7 +137,7 @@ public class repository {
 
 
         }
-
+        assigned_orders.remove(ord_id);
         order_db.remove(ord_id);
     }
 
